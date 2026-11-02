@@ -2,6 +2,9 @@
 
 MacroLens es un registro nutricional personal, mobile-first, con estética glassmorphism oscura y acentos esmeralda. Analiza una foto de tu plato (simulado en esta versión), estima calorías y macros, evalúa la **rentabilidad proteica** con un semáforo y guarda tu día en el navegador.
 
+**Demo:** https://macrolens-two.vercel.app/  
+**Repositorio:** https://github.com/elalex2000pro-sketch/macrolens
+
 ## Funcionalidad
 
 - **Escáner** con cámara o galería, arrastrar y soltar, previsualización, animación de análisis de ~2 s, tarjeta de resultado y botón para añadir al día.
@@ -17,10 +20,9 @@ MacroLens es un registro nutricional personal, mobile-first, con estética glass
 
 ## Cómo ejecutarlo
 
-No necesita build ni dependencias. Sirve la carpeta con cualquier servidor estático:
+No necesita build ni dependencias. Desde la raíz del repositorio:
 
 ```bash
-cd macrolens
 python -m http.server 4173
 ```
 
@@ -31,7 +33,7 @@ También puedes abrir `index.html` directamente (`file://`), aunque se recomiend
 ## Estructura
 
 ```
-macrolens/
+.
 ├── index.html              # Shell, vistas, sprite SVG e inputs de archivo
 ├── assets/logo.svg         # Logo / favicon
 ├── css/
@@ -50,6 +52,7 @@ macrolens/
 │       ├── sheet.js        # Hoja inferior accesible
 │       └── toast.js        # Avisos con acción (deshacer, ver mi día)
 ├── vercel.json             # Configuración de despliegue estático y cabeceras
+├── .gitattributes
 ├── .gitignore
 └── README.md
 ```
@@ -109,7 +112,7 @@ Para producción, envía la imagen a tu propio backend (`POST /api/analyze`) y d
 
 ## Publicar en GitHub y Vercel
 
-La app es 100 % estática: no hay build, variables de entorno ni backend. La carpeta `macrolens/` es la raíz del repositorio.
+La app es 100 % estática: no hay build, variables de entorno ni backend. La raíz del repositorio **es** la app (no hay subcarpeta): `index.html`, `css/` y `js/` viven en el primer nivel.
 
 ### 1. Crear el repositorio en GitHub
 
