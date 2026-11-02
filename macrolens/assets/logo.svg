@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="MacroLens">
+  <defs>
+    <linearGradient id="mlg" x1="10" y1="6" x2="54" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8AFFD4"/>
+      <stop offset="0.55" stop-color="#3EE6A4"/>
+      <stop offset="1" stop-color="#14BC80"/>
+    </linearGradient>
+    <radialGradient id="mlbg" cx="0" cy="0" r="1" gradientTransform="translate(20 16) rotate(52) scale(56)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#12352A"/>
+      <stop offset="1" stop-color="#07120F"/>
+    </radialGradient>
+  </defs>
+  <rect width="64" height="64" rx="18" fill="url(#mlbg)"/>
+  <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="17.25" fill="none" stroke="url(#mlg)" stroke-opacity="0.34" stroke-width="1.5"/>
+  <circle cx="30" cy="33" r="13.5" fill="none" stroke="url(#mlg)" stroke-width="3.6"/>
+  <circle cx="30" cy="33" r="4.4" fill="url(#mlg)"/>
+  <path d="M39.6 22.4c5.2-.1 8.4-2 10.4-7.1-5.2.1-8.4 2-10.4 7.1Z" fill="url(#mlg)"/>
+  <path d="M39.9 22.1c-.5 2.7-.2 5.7 1.2 8.3" fill="none" stroke="#3EE6A4" stroke-opacity="0.55" stroke-width="1.4" stroke-linecap="round"/>
+  <circle cx="14.5" cy="20" r="1.4" fill="#8AFFD4" fill-opacity="0.8"/>
+</svg>

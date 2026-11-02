@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>MacroLens · Nutrición con visión</title>
+  <meta name="description" content="Escanea tu plato, descubre sus macros y registra tu día con un semáforo de rentabilidad proteica pensado para ganar masa muscular.">
+  <meta name="theme-color" content="#07120F">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+  <!-- Iconos SVG reutilizables -->
+  <svg class="svg-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-camera" viewBox="0 0 24 24">
+      <path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h1.2l1.1-1.7A1.5 1.5 0 0 1 10.1 3h3.8a1.5 1.5 0 0 1 1.3.7L16.3 6h1.2A2.5 2.5 0 0 1 20 8.5v8A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5z"/>
+      <circle cx="12" cy="12.5" r="3.2"/>
+    </symbol>
+    <symbol id="i-image" viewBox="0 0 24 24">
+      <rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/>
+      <circle cx="9" cy="10" r="1.6"/>
+      <path d="m5 18 4.5-4.5 3.5 3 2-2 4 4"/>
+    </symbol>
+    <symbol id="i-scan" viewBox="0 0 24 24">
+      <path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/>
+      <circle cx="12" cy="12" r="3.2"/>
+    </symbol>
+    <symbol id="i-day" viewBox="0 0 24 24">
+      <path d="M12 4a8 8 0 1 0 8 8h-8z"/>
+      <path d="M14.2 3.3A8 8 0 0 1 20.7 9.8h-6.5z"/>
+    </symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24">
+      <path d="M4 7h9M18 7h2M4 17h4M13 17h7"/>
+      <circle cx="16" cy="7" r="2"/>
+      <circle cx="10" cy="17" r="2"/>
+    </symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24">
+      <path d="M4 7h16M9 7V5a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 5v2M6.5 7l.8 12a2 2 0 0 0 2 1.9h5.4a2 2 0 0 0 2-1.9l.8-12"/>
+      <path d="M10 11v5M14 11v5"/>
+    </symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="m14.5 5-7 7 7 7"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="m9.5 5 7 7-7 7"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7"/></symbol>
+    <symbol id="i-sparkles" viewBox="0 0 24 24">
+      <path d="m11 3 1.7 4.6L17.5 9.5l-4.8 1.9L11 16l-1.7-4.6L4.5 9.5l4.8-1.9z"/>
+      <path d="m18.5 14.5.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/>
+    </symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24">
+      <path d="M20 4C10.5 4 4 8.7 4 15a5 5 0 0 0 5 5c6.5 0 11-6.2 11-16Z"/>
+      <path d="M4.5 19.5C8 14 12 10.5 17 8"/>
+    </symbol>
+    <symbol id="i-flame" viewBox="0 0 24 24">
+      <path d="M12 21a6 6 0 0 0 6-6c0-3-2-5.5-4-7.5-.4 1.8-1.5 3-3 4 0-3-1.5-5.5-3-7.5C7 8 6 10.5 6 13a6 6 0 0 0 6 8Z"/>
+    </symbol>
+    <symbol id="i-target" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/>
+    </symbol>
+    <symbol id="i-info" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8.5"/><path d="M12 11v5M12 8h.01"/>
+    </symbol>
+    <symbol id="i-download" viewBox="0 0 24 24">
+      <path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19.5h14"/>
+    </symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 5.5l6.5 6.5-6.5 6.5"/></symbol>
+    <symbol id="i-plate" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/>
+    </symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>
+    </symbol>
+    <symbol id="i-undo" viewBox="0 0 24 24">
+      <path d="M9 7 4 11l5 4"/><path d="M4 11h9a6 6 0 0 1 0 12h-1"/>
+    </symbol>
+  </svg>
+
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <div class="ambient" aria-hidden="true">
+    <span class="blob blob--emerald"></span>
+    <span class="blob blob--blue"></span>
+    <span class="blob blob--warm"></span>
+    <span class="grain"></span>
+  </div>
+
+  <div class="app-shell">
+    <header class="app-header">
+      <a class="brand" href="#escaner" data-go-home>
+        <img src="assets/logo.svg" alt="" width="40" height="40">
+        <span class="brand-text">
+          <strong>Macro<span>Lens</span></strong>
+          <small>Nutrición con visión</small>
+        </span>
+      </a>
+
+      <nav class="top-nav" aria-label="Navegación principal">
+        <button class="nav-link is-active" type="button" data-nav="scanner" aria-current="page">
+          <svg class="icon" aria-hidden="true"><use href="#i-scan"></use></svg>
+          Escáner
+        </button>
+        <button class="nav-link" type="button" data-nav="dashboard">
+          <svg class="icon" aria-hidden="true"><use href="#i-day"></use></svg>
+          Mi día
+        </button>
+      </nav>
+
+      <button class="icon-btn header-settings" type="button" data-open-settings aria-label="Ajustar objetivos diarios" title="Ajustar objetivos">
+        <svg class="icon" aria-hidden="true"><use href="#i-settings"></use></svg>
+      </button>
+    </header>
+
+    <main id="main">
+      <!-- ================= ESCÁNER ================= -->
+      <section class="view is-active" id="view-scanner" data-view="scanner" aria-labelledby="scanner-title">
+        <header class="view-head">
+          <span class="eyebrow">
+            <svg class="icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>
+            Escáner inteligente
+          </span>
+          <h1 id="scanner-title">Enfoca tu plato.<br><span class="text-gradient">Cuentas claras.</span></h1>
+          <p>Una foto, macros estimados y un semáforo para tu objetivo de masa muscular.</p>
+        </header>
+
+        <div class="scanner-grid">
+          <section class="glass scan-card" id="scan-card" aria-label="Analizar una comida">
+            <div id="scan-stage" class="scan-stage"></div>
+            <p class="stage-footnote">
+              <svg class="icon" aria-hidden="true"><use href="#i-info"></use></svg>
+              Estimaciones orientativas. La IA real se conectará en el siguiente paso.
+            </p>
+          </section>
+
+          <div class="scan-side" id="scan-side"></div>
+        </div>
+      </section>
+
+      <!-- ================= DASHBOARD ================= -->
+      <section class="view" id="view-dashboard" data-view="dashboard" aria-labelledby="dashboard-title" hidden>
+        <header class="view-head view-head--dashboard">
+          <div>
+            <span class="eyebrow">
+              <svg class="icon" aria-hidden="true"><use href="#i-day"></use></svg>
+              Tu registro
+            </span>
+            <h1 id="dashboard-title">Mi día <span class="text-gradient">nutricional</span></h1>
+            <p>Calorías, proteína y comidas del día. Todo lo que necesitas para decidir la siguiente.</p>
+          </div>
+          <button class="btn btn--ghost btn--sm goals-btn" type="button" data-open-settings>
+            <svg class="icon" aria-hidden="true"><use href="#i-target"></use></svg>
+            Objetivos
+          </button>
+        </header>
+
+        <div class="glass day-nav">
+          <div class="date-row">
+            <button class="icon-btn date-arrow" type="button" id="prev-day" aria-label="Ver día anterior">
+              <svg class="icon" aria-hidden="true"><use href="#i-left"></use></svg>
+            </button>
+            <div class="date-center">
+              <span class="date-rel" id="date-rel">Hoy</span>
+              <strong class="date-full" id="date-full">Cargando…</strong>
+            </div>
+            <button class="icon-btn date-arrow" type="button" id="next-day" aria-label="Ver día siguiente">
+              <svg class="icon" aria-hidden="true"><use href="#i-right"></use></svg>
+            </button>
+          </div>
+          <div class="week-strip" id="week-strip" role="group" aria-label="Elegir día"></div>
+        </div>
+
+        <button class="past-banner" type="button" id="back-today" hidden>
+          <span class="past-banner-copy">
+            <svg class="icon" aria-hidden="true"><use href="#i-info"></use></svg>
+            Estás viendo un día anterior
+          </span>
+          <span class="past-banner-link">Volver a hoy <svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></span>
+        </button>
+
+        <div class="dashboard-grid">
+          <div id="summary-slot"></div>
+          <div id="history-slot"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <svg class="icon" aria-hidden="true"><use href="#i-leaf"></use></svg>
+      Tus datos viven solo en este navegador. Sin cuentas, sin nube.
+    </footer>
+
+    <nav class="bottom-nav" aria-label="Navegación móvil">
+      <button class="bottom-link is-active" type="button" data-nav="scanner">
+        <svg class="icon" aria-hidden="true"><use href="#i-scan"></use></svg>
+        <span>Escanear</span>
+      </button>
+      <button class="bottom-link" type="button" data-nav="dashboard">
+        <svg class="icon" aria-hidden="true"><use href="#i-day"></use></svg>
+        <span>Mi día</span>
+      </button>
+    </nav>
+  </div>
+
+  <div class="toast-root" id="toast-root" aria-live="polite" aria-atomic="false"></div>
+  <div id="sheet-root"></div>
+
+  <input type="file" id="input-camera" accept="image/*" capture="environment" hidden>
+  <input type="file" id="input-gallery" accept="image/*" hidden>
+
+  <script src="js/utils.js"></script>
+  <script src="js/nutrition.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui/toast.js"></script>
+  <script src="js/ui/sheet.js"></script>
+  <script src="js/ui/settings.js"></script>
+  <script src="js/ui/scanner.js"></script>
+  <script src="js/ui/dashboard.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
